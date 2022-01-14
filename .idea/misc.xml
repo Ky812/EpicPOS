@@ -5,7 +5,10 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29444444444444445" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_customer_homepage.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_forget_password.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_user_register.xml" value="0.25" />
       </map>
     </option>
   </component>

@@ -1,0 +1,89 @@
+package my.edu.tarc.epicpos
+
+import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import my.edu.tarc.epicpos.data.Customer
+import my.edu.tarc.epicpos.databinding.FragmentUserRegisterBinding
+
+
+class UserRegisterFragment : Fragment() {
+    private lateinit var binding : FragmentUserRegisterBinding
+    private lateinit var auth : FirebaseAuth
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_user_register,container,false)
+        auth = Firebase.auth
+        val db = Firebase.firestore
+
+        binding.btnRegis.setOnClickListener(){
+            when{
+                TextUtils.isEmpty(binding.editTextName.text.toString().trim() { it <= ' ' }) ->{
+                    Toast.makeText(context,"Please enter name.", Toast.LENGTH_SHORT).show()
+                }
+                TextUtils.isEmpty(binding.editTextTel.text.toString().trim { it <= ' ' }) ->{
+                    Toast.makeText(context,"Please enter telephone number.", Toast.LENGTH_SHORT).show()
+                }
+                TextUtils.isEmpty(binding.editTextGender.text.toString().trim { it <= ' ' }) ->{
+                    Toast.makeText(context,"Please enter gender.", Toast.LENGTH_SHORT).show()
+                }
+                TextUtils.isEmpty(binding.editTextEmail.text.toString().trim { it <= ' ' }) ->{
+                    Toast.makeText(context,"Please enter email.",Toast.LENGTH_SHORT).show()
+                }
+                TextUtils.isEmpty(binding.editTextPassword.text.toString().trim { it <= ' ' }) ->{
+                    Toast.makeText(context,"Please enter password.",Toast.LENGTH_SHORT).show()
+                }
+                TextUtils.isEmpty(binding.editTextConfPassword.text.toString().trim { it <= ' ' }) ->{
+                    Toast.makeText(context,"Please enter confirm password.",Toast.LENGTH_SHORT).show()
+                }
+                binding.editTextPassword.text.toString().trim { it <= ' ' } != binding.editTextConfPassword.text.toString().trim { it <= ' ' } ->{
+                    Toast.makeText(context,"Please enter the same password with confirm password.",Toast.LENGTH_LONG).show()
+                }
+
+                else -> {
+                    val email = binding.editTextEmail.text.toString().trim { it <= ' ' }
+                    val password = binding.editTextPassword.text.toString().trim { it <= ' ' }
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(){
+                        task ->
+                        if (task.isSuccessful){
+                            val customerName : String = binding.editTextName.text.toString().trim() { it <= ' ' }
+                            val customerTel : String = binding.editTextTel.text.toString().trim { it <= ' ' }
+                            val customerGender : String = binding.editTextGender.text.toString().trim { it <= ' ' }
+                            db.collection("Customers").document("$email").set(Customer("$customerName","$email","$customerTel","$customerGender","Non-Membership","Customer"))
+                                .addOnSuccessListener { documentReference ->
+                                    // Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
+                                }
+                                .addOnFailureListener { e ->
+                                    Log.w("TAG", "Error adding document", e)
+                                }
+                            val firebaseUser: FirebaseUser = task.result!!.user!!
+                            Toast.makeText(context,"Registered Successful",Toast.LENGTH_SHORT).show()
+                            Navigation.findNavController(it).navigate(R.id.action_userRegisterFragment_to_loginFragment)
+
+                        }else{
+                            Toast.makeText(context,task.exception!!.message.toString(),Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                }
+            }
+        }
+
+        return binding.root
+    }
+
+}
