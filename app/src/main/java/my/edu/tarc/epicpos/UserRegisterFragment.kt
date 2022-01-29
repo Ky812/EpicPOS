@@ -13,6 +13,10 @@ import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import my.edu.tarc.epicpos.data.Customer
@@ -29,10 +33,12 @@ class UserRegisterFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_user_register,container,false)
         auth = Firebase.auth
         val db = Firebase.firestore
+        val database = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/")
+        val ref = database.getReference("Customers")
 
         binding.btnRegis.setOnClickListener(){
             when{
-                TextUtils.isEmpty(binding.editTextName.text.toString().trim() { it <= ' ' }) ->{
+                TextUtils.isEmpty(binding.editTextName.text.toString().trim { it <= ' ' }) ->{
                     Toast.makeText(context,"Please enter name.", Toast.LENGTH_SHORT).show()
                 }
                 TextUtils.isEmpty(binding.editTextTel.text.toString().trim { it <= ' ' }) ->{
@@ -63,14 +69,17 @@ class UserRegisterFragment : Fragment() {
                             val customerName : String = binding.editTextName.text.toString().trim() { it <= ' ' }
                             val customerTel : String = binding.editTextTel.text.toString().trim { it <= ' ' }
                             val customerGender : String = binding.editTextGender.text.toString().trim { it <= ' ' }
-                            db.collection("Customers").document("$email").set(Customer("$customerName","$email","$customerTel","$customerGender","Non-Membership","Customer"))
-                                .addOnSuccessListener { documentReference ->
-                                    // Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
-                                }
-                                .addOnFailureListener { e ->
-                                    Log.w("TAG", "Error adding document", e)
-                                }
                             val firebaseUser: FirebaseUser = task.result!!.user!!
+                            ref.addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    ref.child(firebaseUser.uid).setValue(Customer("$customerName","$email","$customerTel","$customerGender","Non-Membership","Customer"))
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                    Log.w("TAG", "Error adding document")
+                                }
+
+                            })
                             Toast.makeText(context,"Registered Successful",Toast.LENGTH_SHORT).show()
                             Navigation.findNavController(it).navigate(R.id.action_userRegisterFragment_to_loginFragment)
 

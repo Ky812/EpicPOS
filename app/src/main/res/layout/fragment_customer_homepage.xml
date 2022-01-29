@@ -14,7 +14,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/firebasename"
+                android:id="@+id/tvWelcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -23,10 +23,10 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginBottom="60dp"
-                android:text="Welcome,"
-                android:textStyle="bold"
+                android:textAlignment="center"
                 android:textColor="#F57C00"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
             <GridLayout
                 android:id="@+id/mainGrid"
@@ -44,7 +44,7 @@
 
                 <!-- Column 1 -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/addItems"
+                    android:id="@+id/orderCardView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_rowWeight="1"
@@ -52,6 +52,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="16dp"
+                    android:clickable="true"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="8dp">
 
@@ -65,7 +66,8 @@
                         <ImageView
 
                             android:layout_width="85dp"
-                            android:layout_height="85dp"/>
+                            android:layout_height="85dp"
+                            app:srcCompat="@drawable/orderfood" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -82,7 +84,7 @@
 
                 <!-- Column 2 -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/deleteItems"
+                    android:id="@+id/memberCardView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_rowWeight="1"
@@ -103,7 +105,8 @@
                         <ImageView
 
                             android:layout_width="85dp"
-                            android:layout_height="85dp" />
+                            android:layout_height="85dp"
+                            app:srcCompat="@drawable/membership" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -120,7 +123,7 @@
 
                 <!-- Column 1 -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/scanItems"
+                    android:id="@+id/profileCardView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_rowWeight="1"
@@ -141,7 +144,8 @@
                         <ImageView
 
                             android:layout_width="85dp"
-                            android:layout_height="85dp"/>
+                            android:layout_height="85dp"
+                            app:srcCompat="@drawable/user" />
 
                         <TextView
                             android:layout_marginTop="10dp"
@@ -157,7 +161,7 @@
 
                 <!-- Column 2 -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/viewInventory"
+                    android:id="@+id/signOutCardView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_rowWeight="1"
@@ -178,7 +182,8 @@
                         <ImageView
 
                             android:layout_width="85dp"
-                            android:layout_height="85dp" />
+                            android:layout_height="85dp"
+                            app:srcCompat="@drawable/exit" />
 
                         <TextView
                             android:layout_width="wrap_content"

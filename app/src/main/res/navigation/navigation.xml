@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
             app:destination="@id/forgetPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_customerHomepageFragment"
+            app:destination="@id/customerHomepageFragment" />
     </fragment>
     <fragment
         android:id="@+id/userRegisterFragment"
@@ -31,5 +34,31 @@
         <action
             android:id="@+id/action_forgetPasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerHomepageFragment"
+        android:name="my.edu.tarc.epicpos.CustomerHomepageFragment"
+        android:label="fragment_customer_homepage"
+        tools:layout="@layout/fragment_customer_homepage" >
+        <action
+            android:id="@+id/action_customerHomepageFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_customerHomepageFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="my.edu.tarc.epicpos.OrderListFragment"
+        android:label="fragment_order_list"
+        tools:layout="@layout/fragment_order_list" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="my.edu.tarc.epicpos.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
     </fragment>
 </navigation>
