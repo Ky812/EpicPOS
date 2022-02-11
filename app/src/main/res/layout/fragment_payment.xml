@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".PaymentFragment"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/tvPayment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto"
+            android:text="Payment" />
+
+        <LinearLayout
+            android:id="@+id/orderPaymentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto"
+                android:text="Total"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTotalNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnPay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="100dp"
+            android:backgroundTint="#4CAF50"
+            app:cornerRadius="100dp"
+            android:text="Pay" />
+
+        <LinearLayout
+            android:id="@+id/PaymentMethodLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvPaymentMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="Payment Method"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
+
+                <RadioButton
+                    android:id="@+id/rdBtnVisa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Visa" />
+
+                <RadioButton
+                    android:id="@+id/rdBtnMastercard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mastercard" />
+
+                <RadioButton
+                    android:id="@+id/rdBtnAmex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Amex" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="100dp"
+                android:backgroundTint="#4CAF50"
+                android:text="Confirm"
+                app:cornerRadius="100dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/PaymentDetailsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvPaymentDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="Payment Details"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editCreditcardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:ems="10"
+                android:hint="Credit Card Number"
+                android:inputType="number"
+                android:maxLength="16" />
+
+            <EditText
+                android:id="@+id/editCreditcardAmexNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Credit Card Number"
+                android:inputType="number"
+                android:maxLength="15" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editExpiryDate"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Expiry Date"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/editCVC"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="CCV"
+                    android:inputType="number"
+                    android:maxLength="3" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="100dp"
+                android:backgroundTint="#4CAF50"
+                android:text="Pay"
+                app:cornerRadius="100dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

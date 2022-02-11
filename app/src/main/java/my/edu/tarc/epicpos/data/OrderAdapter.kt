@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -18,7 +19,8 @@ import my.edu.tarc.epicpos.R
 class OrderAdapter (private val orderList : List<Order>) : RecyclerView.Adapter<OrderAdapter.orderViewHolder>() {
     val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
     val database = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/")
-    val ref = database.getReference("Customers").child("$currentUser").child("TempOrder")
+    val ref = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails")
+    var totalAmount = 0.0
 
     class orderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val orderDetailsName : TextView = itemView.findViewById(R.id.tvOrderDetailsName)
@@ -38,20 +40,59 @@ class OrderAdapter (private val orderList : List<Order>) : RecyclerView.Adapter<
         holder.orderDetailsName.text = currentPosition.itemName
         holder.orderDetailsQty.text = currentPosition.quantity
         holder.orderDetailsPrice.text = "RM" + currentPosition.price
-        //need to chg
-        val removeRef = database.getReference("Customers").child("$currentUser").child("TempOrder").child("-MuRuYBhd_xqZ5-W9hUG")
+//
+//        ref.addListenerForSingleValueEvent(object : ValueEventListener{
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                snapshot.children.forEach {
+//                    val itemPrice : String = it.child("price").value.toString()
+//                    totalAmount += itemPrice.toDouble()
+//                    Log.i("testing","$totalAmount")
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        })
 
         holder.remove.setOnClickListener(){
-            removeRef.addValueEventListener(object : ValueEventListener{
+            val getKey = database.getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails")
+
+            getKey.orderByChild("itemName").equalTo("${currentPosition.itemName}").addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    var rmv = snapshot.ref.removeValue()
+                    snapshot.children.forEach {
+                        val key : String = it.key.toString()
+                        val removeRef = database.getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails").child("$key")
+
+                        Log.i("key", "$key")
+
+                        removeRef.addListenerForSingleValueEvent(object : ValueEventListener{
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                var rmv = snapshot.ref.removeValue()
+                            }
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    //for (snap in snapshot.children){
+//                        var rmv = snapshot.ref.key
+//                        Log.i("rmv","$rmv")
+//                    //}
+//                }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                Log.w("TAG", "Error Delete document")
+                            }
+
+                        })
+
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Log.w("TAG", "Error Delete document")
+                    TODO("Not yet implemented")
                 }
 
             })
+
         }
 
     }

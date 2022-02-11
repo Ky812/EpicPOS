@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        tools:context=".TableFragment">
+
+        <TextView
+            android:id="@+id/tvTableNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:text="Table No" />
+
+        <EditText
+            android:id="@+id/editTableNo"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="5dp"
+            android:ems="10"
+            android:hint="Table No (Enter only 1-8)"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btnTableNoConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="100dp"
+            app:cornerRadius="100dp"
+            android:text="Confirm" />
+
+    </LinearLayout>
+</layout>
+

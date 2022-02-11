@@ -23,8 +23,7 @@ import my.edu.tarc.epicpos.R
 class MenuAdapter (private val menuList : List<Menu>) : RecyclerView.Adapter<MenuAdapter.menuViewHolder>(){
     val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
     val database = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/")
-    val ref = database.getReference("Customers").child("$currentUser").child("TempOrder")
-    var strTempOrder = ""
+//    var strTempOrder = ""
 
     class menuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val itemName : TextView = itemView.findViewById(R.id.tvOrderDetailsName)
@@ -42,8 +41,14 @@ class MenuAdapter (private val menuList : List<Menu>) : RecyclerView.Adapter<Men
         val currentPosition = menuList[position]
         holder.itemName.text = currentPosition.itemName
         holder.price.text = "RM" + currentPosition.price
+        val ref = database.getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails").child("${currentPosition.itemName}")
+        val db = database.getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails")
         val price = currentPosition.price
         var calPrice = 0.0
+        var existCalPrice = 0.0
+        var strExistQty = ""
+        var totalExistQty = 0
+        var total = 0.0
 
         holder.add.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
@@ -61,20 +66,47 @@ class MenuAdapter (private val menuList : List<Menu>) : RecyclerView.Adapter<Men
                     "Add to Order",
                     DialogInterface.OnClickListener { dialog, which ->
                         itemQty = input.text.toString()
-
+                        if(itemQty == ""){
+                            dialog.dismiss()
+                        }else{
                         calPrice = price.toDouble() * itemQty.toInt()
 
                         ref.addListenerForSingleValueEvent(object : ValueEventListener{
                             override fun onDataChange(snapshot: DataSnapshot) {
-                                ref.push().setValue(Order("${holder.itemName.text}","$calPrice","$itemQty"))
+                                if(snapshot.exists()){
+                                    strExistQty = snapshot.child("quantity").value.toString()
+                                    totalExistQty = strExistQty.toInt() + itemQty.toInt()
+                                    existCalPrice = price.toDouble() * totalExistQty
+                                    ref.setValue(Order("${holder.itemName.text}","$existCalPrice","${totalExistQty.toString()}"))
+                                    Toast.makeText(view.context,"${holder.itemName.text} add to order successful.", Toast.LENGTH_SHORT).show()
+                                }else{
+//                                ref.push().setValue(Order("${holder.itemName.text}","$calPrice","$itemQty"))
+                                    ref.setValue(Order("${holder.itemName.text}","$calPrice","$itemQty"))
+                                    Toast.makeText(view.context,"${holder.itemName.text} add to order successful.", Toast.LENGTH_SHORT).show()
+                                }
                             }
 
                             override fun onCancelled(error: DatabaseError) {
                                 Log.w("TAG", "Error adding document")
                             }
-
                         })
-                        Toast.makeText(view.context,"${holder.itemName.text} add to order successful.", Toast.LENGTH_SHORT).show()
+                            //got bug
+//                            db.addListenerForSingleValueEvent(object : ValueEventListener{
+//                                override fun onDataChange(snapshot: DataSnapshot) {
+//                                    snapshot.children.forEach {
+//                                        //val key : String = it.key.toString()
+//                                        val itemPrice : String = it.child("price").value.toString()
+//                                        total += itemPrice.toDouble()
+//                                        Log.i("price","$total")
+//                                    }
+//                                }
+//
+//                                override fun onCancelled(error: DatabaseError) {
+//                                    TODO("Not yet implemented")
+//                                }
+//
+//                            })
+                        }
                         dialog.cancel()
                     })
 

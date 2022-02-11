@@ -1,12 +1,13 @@
 package my.edu.tarc.epicpos
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.*
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,10 +37,42 @@ class MenuFragment : Fragment() {
         menuRecyclerView.setHasFixedSize(true)
         menuArrayList = arrayListOf<Menu>()
         val btnMyOrder = view.findViewById<Button>(R.id.btnMyOrder)
+        val bundle = Bundle()
+        val args = this.arguments
+        val getTableNoData = args?.get("tableNumber")
+        val getName = args?.get("name")
+        val getMember = args?.get("member")
+
+//        val btnTableNo = view.findViewById<Button>(R.id.btnTableNoConfirm)
+//        val editTableNo = view.findViewById<EditText>(R.id.editTableNo)
+//        val tvTableNo = view.findViewById<TextView>(R.id.tvTableNo)
+//        val tvOrder = view.findViewById<TextView>(R.id.tvOrder)
+//        val searchView = view.findViewById<SearchView>(R.id.search)
 
         btnMyOrder.setOnClickListener(){
-            Navigation.findNavController(it).navigate(R.id.action_menuFragment_to_orderListFragment)
+            bundle.putString("tableNumber",getTableNoData.toString())
+            bundle.putString("name",getName.toString())
+            bundle.putString("member",getMember.toString())
+            Navigation.findNavController(it).navigate(R.id.action_menuFragment_to_orderListFragment,bundle)
         }
+
+//        btnTableNo.setOnClickListener(){
+//            when{
+//                TextUtils.isEmpty(editTableNo.text.toString().trim { it <= ' ' }) ->{
+//                    Toast.makeText(context,"Please enter Table No.", Toast.LENGTH_SHORT).show()
+//                }else -> {
+//                val tableNo = editTableNo.text.toString().trim { it <= ' ' }
+//                    tvTableNo.visibility = View.GONE
+//                    editTableNo.visibility = View.GONE
+//                    btnTableNo.visibility = View.GONE
+//                    tvOrder.visibility = View.VISIBLE
+//                    searchView.visibility = View.VISIBLE
+//                    btnMyOrder.visibility = View.VISIBLE
+//                    menuRecyclerView.visibility = View.VISIBLE
+//
+//                }
+//            }
+//        }
 
         getMenu()
 
@@ -63,7 +96,7 @@ class MenuFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.i("Error", "No Event Found")
+                Log.i("Error", "No Menu Found")
             }
 
         })

@@ -42,7 +42,6 @@ class LoginFragment : Fragment() {
                         if (task.isSuccessful){
                             Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
                             Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_customerHomepageFragment)
-
                         }else{
                             Toast.makeText(context,task.exception!!.message.toString(),Toast.LENGTH_SHORT).show()
 

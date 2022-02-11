@@ -13,10 +13,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 import my.edu.tarc.epicpos.databinding.FragmentCustomerHomepageBinding
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class CustomerHomepageFragment : Fragment() {
     private lateinit var binding : FragmentCustomerHomepageBinding
@@ -30,11 +30,16 @@ class CustomerHomepageFragment : Fragment() {
         val database = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/")
         val ref = database.getReference("Customers").child("$currentUser")
 
+//        var membership = ""
+        val cal = Calendar.getInstance()
+        val month = SimpleDateFormat("ddMMMyyyy")
+        val membershipExpire : String = month.format(cal.time)
+
         Log.d("user", "$currentUser")
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-
+//                    membership = snapshot.child("membership").value.toString()
                     when (snapshot.child("customerGender").value.toString()) {
                             "Male" -> {
                                 binding.tvWelcome.text = "Welcome back, Sir!"
@@ -46,6 +51,11 @@ class CustomerHomepageFragment : Fragment() {
                                 binding.tvWelcome.text = "Welcome !"
                             }
                         }
+                    when(snapshot.child("membership").value.toString()){
+                        "$membershipExpire" -> {
+                            ref.child("membership").setValue("Non-Membership")
+                        }
+                    }
                 }
             }
 
@@ -56,10 +66,10 @@ class CustomerHomepageFragment : Fragment() {
         })
 
         binding.orderCardView.setOnClickListener(){
-            Navigation.findNavController(it).navigate(R.id.action_customerHomepageFragment_to_menuFragment)
+            Navigation.findNavController(it).navigate(R.id.action_customerHomepageFragment_to_tableFragment)
         }
         binding.memberCardView.setOnClickListener {
-
+            Navigation.findNavController(it).navigate(R.id.action_customerHomepageFragment_to_membershipFragment)
         }
         binding.profileCardView.setOnClickListener {
 

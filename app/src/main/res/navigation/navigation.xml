@@ -41,17 +41,25 @@
         android:label="fragment_customer_homepage"
         tools:layout="@layout/fragment_customer_homepage" >
         <action
-            android:id="@+id/action_customerHomepageFragment_to_menuFragment"
-            app:destination="@id/menuFragment" />
-        <action
             android:id="@+id/action_customerHomepageFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_customerHomepageFragment_to_tableFragment"
+            app:destination="@id/tableFragment" />
+        <action
+            android:id="@+id/action_customerHomepageFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment"
+            app:popUpTo="@id/customerHomepageFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"
         android:name="my.edu.tarc.epicpos.OrderListFragment"
         android:label="fragment_order_list"
-        tools:layout="@layout/fragment_order_list" />
+        tools:layout="@layout/fragment_order_list" >
+        <action
+            android:id="@+id/action_orderListFragment_to_confirmOrderFragment"
+            app:destination="@id/confirmOrderFragment" />
+    </fragment>
     <fragment
         android:id="@+id/menuFragment"
         android:name="my.edu.tarc.epicpos.MenuFragment"
@@ -61,4 +69,43 @@
             android:id="@+id/action_menuFragment_to_orderListFragment"
             app:destination="@id/orderListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/tableFragment"
+        android:name="my.edu.tarc.epicpos.TableFragment"
+        android:label="TableFragment" >
+        <action
+            android:id="@+id/action_tableFragment_to_menuFragment"
+            app:destination="@id/menuFragment"
+            app:popUpTo="@id/customerHomepageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmOrderFragment"
+        android:name="my.edu.tarc.epicpos.ConfirmOrderFragment"
+        android:label="fragment_confirm_order"
+        tools:layout="@layout/fragment_confirm_order" >
+        <action
+            android:id="@+id/action_confirmOrderFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/membershipFragment"
+        android:name="my.edu.tarc.epicpos.MembershipFragment"
+        android:label="fragment_membership"
+        tools:layout="@layout/fragment_membership" >
+        <action
+            android:id="@+id/action_membershipFragment_to_membershipPaymentFragment"
+            app:destination="@id/membershipPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/membershipPaymentFragment"
+        android:name="my.edu.tarc.epicpos.MembershipPaymentFragment"
+        android:label="MembershipPaymentFragment" >
+        <action
+            android:id="@+id/action_membershipPaymentFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="my.edu.tarc.epicpos.PaymentFragment"
+        android:label="PaymentFragment" />
 </navigation>
