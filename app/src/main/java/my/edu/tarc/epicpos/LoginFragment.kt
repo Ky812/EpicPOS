@@ -12,6 +12,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import my.edu.tarc.epicpos.databinding.FragmentLoginBinding
 
@@ -19,6 +23,7 @@ import my.edu.tarc.epicpos.databinding.FragmentLoginBinding
 class LoginFragment : Fragment() {
     private lateinit var binding : FragmentLoginBinding
     private lateinit var auth : FirebaseAuth
+    val database = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,11 +45,23 @@ class LoginFragment : Fragment() {
                     FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener(){
                             task ->
                         if (task.isSuccessful){
-                            Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
-                            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_customerHomepageFragment)
+                            val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
+                            val userRef = database.getReference("Customers").child("$currentUser").child("userType")
+                                        userRef.addListenerForSingleValueEvent(object : ValueEventListener{
+                                            override fun onDataChange(snapshot: DataSnapshot) {
+                                                if(snapshot.value.toString() == "Customer"){
+                                                    Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
+                                                    Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_customerHomepageFragment)
+                                                }else if(snapshot.value.toString() == "Staff"){
+
+                                                }
+                                            }
+                                            override fun onCancelled(error: DatabaseError) {
+                                                Log.w("TAG", "Read Failed")
+                                            }
+                                        })
                         }else{
                             Toast.makeText(context,task.exception!!.message.toString(),Toast.LENGTH_SHORT).show()
-
                         }
                     }
                 }
@@ -53,7 +70,6 @@ class LoginFragment : Fragment() {
         }
         binding.tvForgetPass.setOnClickListener(){
             Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
-
         }
         binding.tvSignUp.setOnClickListener(){
             Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_userRegisterFragment)

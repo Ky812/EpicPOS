@@ -76,7 +76,8 @@
         <action
             android:id="@+id/action_tableFragment_to_menuFragment"
             app:destination="@id/menuFragment"
-            app:popUpTo="@id/customerHomepageFragment" />
+            app:popUpTo="@id/customerHomepageFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/confirmOrderFragment"
@@ -107,5 +108,19 @@
     <fragment
         android:id="@+id/paymentFragment"
         android:name="my.edu.tarc.epicpos.PaymentFragment"
-        android:label="PaymentFragment" />
+        android:label="PaymentFragment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_customerFeedbackFragment"
+            app:destination="@id/customerFeedbackFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerFeedbackFragment"
+        android:name="my.edu.tarc.epicpos.CustomerFeedbackFragment"
+        android:label="fragment_customer_feedback"
+        tools:layout="@layout/fragment_customer_feedback" >
+        <action
+            android:id="@+id/action_customerFeedbackFragment_to_customerHomepageFragment"
+            app:destination="@id/customerHomepageFragment"
+            app:popUpTo="@id/customerHomepageFragment" />
+    </fragment>
 </navigation>

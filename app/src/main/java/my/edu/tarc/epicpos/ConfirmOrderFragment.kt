@@ -224,6 +224,19 @@ class ConfirmOrderFragment : Fragment() {
                 }
 
             })
+            val delRef = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Customers").child("$currentUser").child("TempOrder")
+
+            delRef.addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var rmv = snapshot.ref.removeValue()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.w("TAG", "Error Delete document")
+                }
+
+            })
+
             Navigation.findNavController(it).navigate(R.id.action_confirmOrderFragment_to_paymentFragment,bundle)
 
         }

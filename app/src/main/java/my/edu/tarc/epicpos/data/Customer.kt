@@ -9,6 +9,3 @@ data class Customer(
     var membership : String = "",
     var userType : String = ""
 )
-//{
-//    constructor(): this("","","","","","","")
-//}

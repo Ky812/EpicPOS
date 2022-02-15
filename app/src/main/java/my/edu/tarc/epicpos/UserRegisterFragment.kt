@@ -44,9 +44,9 @@ class UserRegisterFragment : Fragment() {
                 TextUtils.isEmpty(binding.editTextTel.text.toString().trim { it <= ' ' }) ->{
                     Toast.makeText(context,"Please enter telephone number.", Toast.LENGTH_SHORT).show()
                 }
-                TextUtils.isEmpty(binding.editTextGender.text.toString().trim { it <= ' ' }) ->{
-                    Toast.makeText(context,"Please enter gender.", Toast.LENGTH_SHORT).show()
-                }
+//                TextUtils.isEmpty(binding.editTextGender.text.toString().trim { it <= ' ' }) ->{
+//                    Toast.makeText(context,"Please enter gender.", Toast.LENGTH_SHORT).show()
+//                }
                 TextUtils.isEmpty(binding.editTextEmail.text.toString().trim { it <= ' ' }) ->{
                     Toast.makeText(context,"Please enter email.",Toast.LENGTH_SHORT).show()
                 }
@@ -68,11 +68,15 @@ class UserRegisterFragment : Fragment() {
                         if (task.isSuccessful){
                             val customerName : String = binding.editTextName.text.toString().trim() { it <= ' ' }
                             val customerTel : String = binding.editTextTel.text.toString().trim { it <= ' ' }
-                            val customerGender : String = binding.editTextGender.text.toString().trim { it <= ' ' }
+//                            val customerGender : String = binding.editTextGender.text.toString().trim { it <= ' ' }
                             val firebaseUser: FirebaseUser = task.result!!.user!!
                             ref.addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onDataChange(snapshot: DataSnapshot) {
-                                    ref.child(firebaseUser.uid).setValue(Customer("$customerName","$email","$customerTel","$customerGender","Non-Membership","Customer"))
+                                    if(binding.rdBtnMale.isChecked){
+                                        ref.child(firebaseUser.uid).setValue(Customer("$customerName","$email","$customerTel","Male","Non-Membership","Customer"))
+                                    }else if(binding.rdBtnFemale.isChecked){
+                                        ref.child(firebaseUser.uid).setValue(Customer("$customerName","$email","$customerTel","Female","Non-Membership","Customer"))
+                                    }
                                 }
 
                                 override fun onCancelled(error: DatabaseError) {
