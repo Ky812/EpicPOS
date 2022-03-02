@@ -166,4 +166,9 @@
         android:id="@+id/addStaffFragment"
         android:name="my.edu.tarc.epicpos.AddStaffFragment"
         android:label="AddStaffFragment" />
+    <fragment
+        android:id="@+id/managerInsertNewMenuFragment"
+        android:name="my.edu.tarc.epicpos.ManagerInsertNewMenuFragment"
+        android:label="fragment_manager_insert_new_menu"
+        tools:layout="@layout/fragment_manager_insert_new_menu" />
 </navigation>

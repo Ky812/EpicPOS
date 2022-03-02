@@ -89,7 +89,9 @@ class MenuFragment : Fragment() {
                 if (snapshot.exists()) {
                     for (snap in snapshot.children) {
                         val eve = snap.getValue(Menu::class.java)
-
+                        if (eve != null) {
+                            eve.itemName = snap.key.toString()
+                        }
                         menuArrayList.add(eve!!)
                     }
                     var adapter = MenuAdapter(menuArrayList)
