@@ -38,6 +38,7 @@ class PaymentFragment : Fragment() {
         val month = args?.get("month")
         val date = args?.get("date")
         val time = args?.get("time")
+        val getUserType = args?.get("usertype")
         var price = ""
 
         val cal = Calendar.getInstance()
@@ -116,7 +117,11 @@ class PaymentFragment : Fragment() {
                             Toast.makeText(context,"Payment Successful", Toast.LENGTH_SHORT).show()
                         }
                         }
-                        Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_customerFeedbackFragment)
+                        if(getUserType == "Customer"){
+                            Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_customerFeedbackFragment)
+                        }else if(getUserType == "Staff"){
+                            Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_staffHomepageFragment)
+                        }
                     }
                 }
                 binding.rdBtnMastercard.isChecked -> {
@@ -152,9 +157,13 @@ class PaymentFragment : Fragment() {
                                     Log.i("Error", "Not Found")
                                 }
                             })
-//                            Navigation.findNavController(it).navigate(R.id.action_membershipPaymentFragment_to_membershipFragment)
                             Toast.makeText(context,"Payment Successful", Toast.LENGTH_SHORT).show()
                         }
+                        }
+                        if(getUserType == "Customer"){
+                            Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_customerFeedbackFragment)
+                        }else if(getUserType == "Staff"){
+                            Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_staffHomepageFragment)
                         }
                     }
                 }
@@ -191,9 +200,13 @@ class PaymentFragment : Fragment() {
                                     Log.i("Error", "Not Found")
                                 }
                             })
-//                            Navigation.findNavController(it).navigate(R.id.action_membershipPaymentFragment_to_membershipFragment)
                             Toast.makeText(context,"Payment Successful", Toast.LENGTH_SHORT).show()
                         }
+                        }
+                        if(getUserType == "Customer"){
+                            Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_customerFeedbackFragment)
+                        }else if(getUserType == "Staff"){
+                            Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_staffHomepageFragment)
                         }
                     }
                 }

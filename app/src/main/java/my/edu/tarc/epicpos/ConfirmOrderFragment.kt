@@ -53,7 +53,7 @@ class ConfirmOrderFragment : Fragment() {
         val tvMembershipDiscount = view.findViewById<TextView>(R.id.tvMembershipDiscount)
         val tvSST = view.findViewById<TextView>(R.id.tvSST)
 
-        db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails")
+        db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails")
 
         val cal = Calendar.getInstance()
         var year = cal.get(Calendar.YEAR)
@@ -80,12 +80,14 @@ class ConfirmOrderFragment : Fragment() {
         val getTableNoData = args?.get("tableNumber")
         val getName = args?.get("name")
         val getMember = args?.get("member")
+        val getUserType = args?.get("usertype")
 
         val dbRef = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Orders").child("$year").child("$month_name").child("${date_name}").child("$time_name")
         bundle.putString("year", year.toString())
         bundle.putString("month",month_name)
         bundle.putString("date",date_name)
         bundle.putString("time",time_name)
+        bundle.putString("usertype",getUserType.toString())
 
 
         getOrderPayment()
@@ -224,7 +226,7 @@ class ConfirmOrderFragment : Fragment() {
                 }
 
             })
-            val delRef = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Customers").child("$currentUser").child("TempOrder")
+            val delRef = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child("$currentUser").child("TempOrder")
 
             delRef.addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -242,7 +244,7 @@ class ConfirmOrderFragment : Fragment() {
         }
     }
     private fun getOrderPayment(){
-        db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails")
+        db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails")
         db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 orderArrayList.clear()

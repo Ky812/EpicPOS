@@ -27,9 +27,11 @@ class TableFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_table,container,false)
         val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
         val database = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/")
-        val ref = database.getReference("Customers").child("$currentUser")
+//        val ref = database.getReference("Customers").child("$currentUser")
+        val ref = database.getReference("Users").child("$currentUser")
         var membership = ""
         var name = ""
+        var userType = ""
         val bundle = Bundle()
 
         binding.btnTableNoConfirm.setOnClickListener(){
@@ -44,9 +46,11 @@ class TableFragment : Fragment() {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         name = snapshot.child("customerName").value.toString()
                         membership = snapshot.child("membership").value.toString()
+                        userType = snapshot.child("userType").value.toString()
                         bundle.putString("tableNumber",tableNo)
                         bundle.putString("name",name)
                         bundle.putString("member",membership)
+                        bundle.putString("usertype",userType)
                         Navigation.findNavController(it).navigate(R.id.action_tableFragment_to_menuFragment,bundle)
                     }
 

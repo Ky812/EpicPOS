@@ -28,7 +28,9 @@ class CustomerHomepageFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_customer_homepage,container,false)
         val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
         val database = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/")
-        val ref = database.getReference("Customers").child("$currentUser")
+//        val ref = database.getReference("Customers").child("$currentUser")
+        val ref = database.getReference("Users").child("$currentUser")
+
 
 //        var membership = ""
         val cal = Calendar.getInstance()
@@ -72,7 +74,7 @@ class CustomerHomepageFragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_customerHomepageFragment_to_membershipFragment)
         }
         binding.profileCardView.setOnClickListener {
-
+            Navigation.findNavController(it).navigate(R.id.action_customerHomepageFragment_to_editProfileFragment)
         }
         binding.signOutCardView.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_customerHomepageFragment_to_loginFragment)

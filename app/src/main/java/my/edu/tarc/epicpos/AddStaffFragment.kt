@@ -17,26 +17,24 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import my.edu.tarc.epicpos.data.Users
-import my.edu.tarc.epicpos.databinding.FragmentUserRegisterBinding
+import my.edu.tarc.epicpos.databinding.FragmentAddStaffBinding
 
-
-class UserRegisterFragment : Fragment() {
-    private lateinit var binding : FragmentUserRegisterBinding
+class AddStaffFragment : Fragment() {
+    private lateinit var binding : FragmentAddStaffBinding
     private lateinit var auth : FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_user_register,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_add_staff,container,false)
         auth = Firebase.auth
-        val db = Firebase.firestore
         val database = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/")
         val ref = database.getReference("Users")
 
-        binding.btnRegis.setOnClickListener(){
+        binding.btnAddStaff.setOnClickListener {
             when{
                 TextUtils.isEmpty(binding.editTextName.text.toString().trim { it <= ' ' }) ->{
                     Toast.makeText(context,"Please enter name.", Toast.LENGTH_SHORT).show()
@@ -48,23 +46,24 @@ class UserRegisterFragment : Fragment() {
 //                    Toast.makeText(context,"Please enter gender.", Toast.LENGTH_SHORT).show()
 //                }
                 TextUtils.isEmpty(binding.editTextEmail.text.toString().trim { it <= ' ' }) ->{
-                    Toast.makeText(context,"Please enter email.",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Please enter email.", Toast.LENGTH_SHORT).show()
                 }
                 TextUtils.isEmpty(binding.editTextPassword.text.toString().trim { it <= ' ' }) ->{
-                    Toast.makeText(context,"Please enter password.",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Please enter password.", Toast.LENGTH_SHORT).show()
                 }
                 TextUtils.isEmpty(binding.editTextConfPassword.text.toString().trim { it <= ' ' }) ->{
-                    Toast.makeText(context,"Please enter confirm password.",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Please enter confirm password.", Toast.LENGTH_SHORT).show()
                 }
                 binding.editTextPassword.text.toString().trim { it <= ' ' } != binding.editTextConfPassword.text.toString().trim { it <= ' ' } ->{
-                    Toast.makeText(context,"Please enter the same password with confirm password.",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,"Please enter the same password with confirm password.",
+                        Toast.LENGTH_LONG).show()
                 }
 
                 else -> {
                     val email = binding.editTextEmail.text.toString().trim { it <= ' ' }
                     val password = binding.editTextPassword.text.toString().trim { it <= ' ' }
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(){
-                        task ->
+                            task ->
                         if (task.isSuccessful){
                             val userName : String = binding.editTextName.text.toString().trim() { it <= ' ' }
                             val userTel : String = binding.editTextTel.text.toString().trim { it <= ' ' }
@@ -73,9 +72,9 @@ class UserRegisterFragment : Fragment() {
                             ref.addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onDataChange(snapshot: DataSnapshot) {
                                     if(binding.rdBtnMale.isChecked){
-                                        ref.child(firebaseUser.uid).setValue(Users("$userName","$email","$userTel","Male","Non-Membership","Customer"))
+                                        ref.child(firebaseUser.uid).setValue(Users("$userName","$email","$userTel","Male","Non-Membership","Staff"))
                                     }else if(binding.rdBtnFemale.isChecked){
-                                        ref.child(firebaseUser.uid).setValue(Users("$userName","$email","$userTel","Female","Non-Membership","Customer"))
+                                        ref.child(firebaseUser.uid).setValue(Users("$userName","$email","$userTel","Female","Non-Membership","Staff"))
                                     }
                                 }
 
@@ -85,7 +84,7 @@ class UserRegisterFragment : Fragment() {
 
                             })
                             Toast.makeText(context,"Registered Successful",Toast.LENGTH_SHORT).show()
-                            Navigation.findNavController(it).navigate(R.id.action_userRegisterFragment_to_loginFragment)
+                            //Navigation.findNavController(it).navigate(R.id.action_userRegisterFragment_to_loginFragment)
 
                         }else{
                             Toast.makeText(context,task.exception!!.message.toString(),Toast.LENGTH_SHORT).show()
@@ -95,7 +94,6 @@ class UserRegisterFragment : Fragment() {
                 }
             }
         }
-
         return binding.root
     }
 

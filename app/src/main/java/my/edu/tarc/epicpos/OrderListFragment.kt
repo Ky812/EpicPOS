@@ -70,8 +70,9 @@ class OrderListFragment : Fragment() {
         val getTableNoData = args?.get("tableNumber")
         val getName = args?.get("name")
         val getMember = args?.get("member")
+        val getUserType = args?.get("usertype")
 
-        db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails")
+        db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails")
 
 //        db.addListenerForSingleValueEvent(object : ValueEventListener{
 //            override fun onDataChange(snapshot: DataSnapshot) {
@@ -95,6 +96,7 @@ class OrderListFragment : Fragment() {
             bundle.putString("tableNumber",getTableNoData.toString())
             bundle.putString("name",getName.toString())
             bundle.putString("member",getMember.toString())
+            bundle.putString("usertype",getUserType.toString())
             Navigation.findNavController(it).navigate(R.id.action_orderListFragment_to_confirmOrderFragment,bundle)
 
 //            db.addListenerForSingleValueEvent(object : ValueEventListener{
@@ -154,7 +156,7 @@ class OrderListFragment : Fragment() {
 
     private fun getOrder() {
         //need chg according to id
-        db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails")
+        db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails")
 
         db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

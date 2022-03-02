@@ -6,12 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -29,6 +27,8 @@ class MenuAdapter (private val menuList : List<Menu>) : RecyclerView.Adapter<Men
         val itemName : TextView = itemView.findViewById(R.id.tvOrderDetailsName)
         val price : TextView = itemView.findViewById(R.id.textView5)
         val add : Button = itemView.findViewById(R.id.button5)
+        val img : ImageView = itemView.findViewById(R.id.imageView)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuAdapter.menuViewHolder {
@@ -41,8 +41,9 @@ class MenuAdapter (private val menuList : List<Menu>) : RecyclerView.Adapter<Men
         val currentPosition = menuList[position]
         holder.itemName.text = currentPosition.itemName
         holder.price.text = "RM" + currentPosition.price
-        val ref = database.getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails").child("${currentPosition.itemName}")
-        val db = database.getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails")
+        Glide.with(holder.img.context).load(currentPosition.imageUrl).into(holder.img)
+        val ref = database.getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails").child("${currentPosition.itemName}")
+        val db = database.getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails")
         val price = currentPosition.price
         var calPrice = 0.0
         var existCalPrice = 0.0

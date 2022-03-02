@@ -46,14 +46,15 @@ class LoginFragment : Fragment() {
                             task ->
                         if (task.isSuccessful){
                             val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
-                            val userRef = database.getReference("Customers").child("$currentUser").child("userType")
-                                        userRef.addListenerForSingleValueEvent(object : ValueEventListener{
+//                            val userRef = database.getReference("Customers").child("$currentUser").child("userType")
+                            val userRef = database.getReference("Users").child("$currentUser").child("userType")
+                            userRef.addListenerForSingleValueEvent(object : ValueEventListener{
                                             override fun onDataChange(snapshot: DataSnapshot) {
                                                 if(snapshot.value.toString() == "Customer"){
                                                     Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
                                                     Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_customerHomepageFragment)
                                                 }else if(snapshot.value.toString() == "Staff"){
-
+                                                    Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_staffHomepageFragment)
                                                 }
                                             }
                                             override fun onCancelled(error: DatabaseError) {

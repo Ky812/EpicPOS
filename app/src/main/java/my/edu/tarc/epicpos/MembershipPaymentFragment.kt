@@ -108,7 +108,9 @@ class MembershipPaymentFragment : Fragment() {
     }
 
     private fun updateMembershipStatus(){
-        db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Customers").child("$currentUser")
+//        db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Customers").child("$currentUser")
+        db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child("$currentUser")
+
 
         val cal = Calendar.getInstance()
         val month = SimpleDateFormat("ddMMMyyyy")

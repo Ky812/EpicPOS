@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_loginFragment_to_customerHomepageFragment"
             app:destination="@id/customerHomepageFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_staffHomepageFragment"
+            app:destination="@id/staffHomepageFragment" />
     </fragment>
     <fragment
         android:id="@+id/userRegisterFragment"
@@ -49,6 +52,10 @@
         <action
             android:id="@+id/action_customerHomepageFragment_to_membershipFragment"
             app:destination="@id/membershipFragment"
+            app:popUpTo="@id/customerHomepageFragment" />
+        <action
+            android:id="@+id/action_customerHomepageFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
             app:popUpTo="@id/customerHomepageFragment" />
     </fragment>
     <fragment
@@ -112,6 +119,9 @@
         <action
             android:id="@+id/action_paymentFragment_to_customerFeedbackFragment"
             app:destination="@id/customerFeedbackFragment" />
+        <action
+            android:id="@+id/action_paymentFragment_to_staffHomepageFragment"
+            app:destination="@id/staffHomepageFragment" />
     </fragment>
     <fragment
         android:id="@+id/customerFeedbackFragment"
@@ -123,4 +133,37 @@
             app:destination="@id/customerHomepageFragment"
             app:popUpTo="@id/customerHomepageFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/viewFeedbackFragment"
+        android:name="my.edu.tarc.epicpos.ViewFeedbackFragment"
+        android:label="fragment_view_feedback"
+        tools:layout="@layout/fragment_view_feedback" />
+    <fragment
+        android:id="@+id/staffHomepageFragment"
+        android:name="my.edu.tarc.epicpos.StaffHomepageFragment"
+        android:label="fragment_staff_homepage"
+        tools:layout="@layout/fragment_staff_homepage" >
+        <action
+            android:id="@+id/action_staffHomepageFragment_to_viewFeedbackFragment"
+            app:destination="@id/viewFeedbackFragment" />
+        <action
+            android:id="@+id/action_staffHomepageFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:popUpTo="@id/staffHomepageFragment" />
+        <action
+            android:id="@+id/action_staffHomepageFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_staffHomepageFragment_to_tableFragment"
+            app:destination="@id/tableFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="my.edu.tarc.epicpos.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/addStaffFragment"
+        android:name="my.edu.tarc.epicpos.AddStaffFragment"
+        android:label="AddStaffFragment" />
 </navigation>

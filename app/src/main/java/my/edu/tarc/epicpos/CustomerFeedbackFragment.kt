@@ -35,13 +35,14 @@ class CustomerFeedbackFragment : Fragment() {
                     db.addListenerForSingleValueEvent(object : ValueEventListener{
                         override fun onDataChange(snapshot: DataSnapshot) {
                             db.push().setValue(Feedback("$feedback","${binding.ratingBar.rating}"))
-                        Toast.makeText(context,"Feedback Send Successful.", Toast.LENGTH_SHORT).show()
                         }
                         override fun onCancelled(error: DatabaseError) {
                             Log.w("TAG", "Add Feedback Failed")
                         }
 
                     })
+                Toast.makeText(context,"Feedback Send Successful.", Toast.LENGTH_SHORT).show()
+
                 Navigation.findNavController(it).navigate(R.id.action_customerFeedbackFragment_to_customerHomepageFragment)
             }
         }

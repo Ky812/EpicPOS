@@ -42,6 +42,7 @@ class MenuFragment : Fragment() {
         val getTableNoData = args?.get("tableNumber")
         val getName = args?.get("name")
         val getMember = args?.get("member")
+        val getUserType = args?.get("usertype")
 
 //        val btnTableNo = view.findViewById<Button>(R.id.btnTableNoConfirm)
 //        val editTableNo = view.findViewById<EditText>(R.id.editTableNo)
@@ -53,6 +54,7 @@ class MenuFragment : Fragment() {
             bundle.putString("tableNumber",getTableNoData.toString())
             bundle.putString("name",getName.toString())
             bundle.putString("member",getMember.toString())
+            bundle.putString("usertype",getUserType.toString())
             Navigation.findNavController(it).navigate(R.id.action_menuFragment_to_orderListFragment,bundle)
         }
 

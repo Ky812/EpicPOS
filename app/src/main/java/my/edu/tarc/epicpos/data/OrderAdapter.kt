@@ -19,7 +19,7 @@ import my.edu.tarc.epicpos.R
 class OrderAdapter (private val orderList : List<Order>) : RecyclerView.Adapter<OrderAdapter.orderViewHolder>() {
     val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
     val database = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/")
-    val ref = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails")
+    val ref = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails")
     var totalAmount = 0.0
 
     class orderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -57,13 +57,13 @@ class OrderAdapter (private val orderList : List<Order>) : RecyclerView.Adapter<
 //        })
 
         holder.remove.setOnClickListener(){
-            val getKey = database.getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails")
+            val getKey = database.getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails")
 
             getKey.orderByChild("itemName").equalTo("${currentPosition.itemName}").addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     snapshot.children.forEach {
                         val key : String = it.key.toString()
-                        val removeRef = database.getReference("Customers").child("$currentUser").child("TempOrder").child("OrderDetails").child("$key")
+                        val removeRef = database.getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails").child("$key")
 
                         Log.i("key", "$key")
 
