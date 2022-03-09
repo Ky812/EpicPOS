@@ -31,8 +31,8 @@ class EditProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 binding.btnUpdateProfile.setOnClickListener(){
-                    db.child("customerName").setValue(binding.txtCustomerName.text.toString())
-                    db.child("customerTel").setValue(binding.txtCustomerTel.text.toString())
+                    db.child("userName").setValue(binding.txtCustomerName.text.toString())
+                    db.child("userTel").setValue(binding.txtCustomerTel.text.toString())
                     Toast.makeText(context, "Updated Successful", Toast.LENGTH_LONG).show()
                 }
             }

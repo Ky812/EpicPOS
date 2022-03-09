@@ -5,6 +5,7 @@ data class Payment(
     var paymentType : String = "",
     var paymentDateTime : String = "",
     var orderID : String = "",
-    var customerID : String = ""
+    var customerID : String = "",
+    var datePayment : String =""
 
 )

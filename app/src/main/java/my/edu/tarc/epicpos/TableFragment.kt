@@ -44,14 +44,15 @@ class TableFragment : Fragment() {
 
                 ref.addListenerForSingleValueEvent(object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        name = snapshot.child("customerName").value.toString()
+                        name = snapshot.child("userName").value.toString()
                         membership = snapshot.child("membership").value.toString()
                         userType = snapshot.child("userType").value.toString()
                         bundle.putString("tableNumber",tableNo)
                         bundle.putString("name",name)
                         bundle.putString("member",membership)
                         bundle.putString("usertype",userType)
-                        Navigation.findNavController(it).navigate(R.id.action_tableFragment_to_menuFragment,bundle)
+//                        Navigation.findNavController(it).navigate(R.id.action_tableFragment_to_menuFragment,bundle)
+                        Navigation.findNavController(it).navigate(R.id.action_tableFragment_to_categoriseMenuFragment,bundle)
                     }
 
                     override fun onCancelled(error: DatabaseError) {

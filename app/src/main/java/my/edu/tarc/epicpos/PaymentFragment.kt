@@ -54,7 +54,7 @@ class PaymentFragment : Fragment() {
 
 
         val dbRef = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Orders").child("$year").child("$month").child("$date").child("$time").child("total")
-        val dbPayment = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Payment").child("$dbYear").child("$month_name").child("$date_name")
+        val dbPayment = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Payment")
 
         dbRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -101,7 +101,7 @@ class PaymentFragment : Fragment() {
                                     binding.tvTotalNumber.text = "RM $price"
                             dbPayment.addListenerForSingleValueEvent(object : ValueEventListener{
                                 override fun onDataChange(snapshot: DataSnapshot) {
-                                    dbPayment.push().setValue(Payment("$price","$visa","$dbDateTime","$time","$currentUser"))
+                                    dbPayment.push().setValue(Payment("$price","$visa","$dbDateTime","$time","$currentUser",date_name))
                                 }
                                 override fun onCancelled(error: DatabaseError) {
                                     TODO("Not yet implemented")
@@ -146,7 +146,7 @@ class PaymentFragment : Fragment() {
                                     binding.tvTotalNumber.text = "RM $price"
                                     dbPayment.addListenerForSingleValueEvent(object : ValueEventListener{
                                         override fun onDataChange(snapshot: DataSnapshot) {
-                                            dbPayment.push().setValue(Payment("$price","$mastercard","$dbDateTime","$time","$currentUser"))
+                                            dbPayment.push().setValue(Payment("$price","$mastercard","$dbDateTime","$time","$currentUser", date_name))
                                         }
                                         override fun onCancelled(error: DatabaseError) {
                                             TODO("Not yet implemented")
@@ -189,7 +189,7 @@ class PaymentFragment : Fragment() {
                                     binding.tvTotalNumber.text = "RM $price"
                                     dbPayment.addListenerForSingleValueEvent(object : ValueEventListener{
                                         override fun onDataChange(snapshot: DataSnapshot) {
-                                            dbPayment.push().setValue(Payment("$price","$amex","$dbDateTime","$time","$currentUser"))
+                                            dbPayment.push().setValue(Payment("$price","$amex","$dbDateTime","$time","$currentUser",date_name))
                                         }
                                         override fun onCancelled(error: DatabaseError) {
                                             TODO("Not yet implemented")

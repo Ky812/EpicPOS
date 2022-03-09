@@ -42,7 +42,7 @@ class CustomerHomepageFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
 //                    membership = snapshot.child("membership").value.toString()
-                    when (snapshot.child("customerGender").value.toString()) {
+                    when (snapshot.child("userGender").value.toString()) {
                             "Male" -> {
                                 binding.tvWelcome.text = "Welcome back, Sir!"
                             }

@@ -146,6 +146,8 @@ class ManagerInsertNewMenuFragment : Fragment() {
                     Toast.makeText(context, "Menu Insert Success", Toast.LENGTH_LONG)
                         .show()
 
+                    Navigation.findNavController(it)
+                        .navigate(R.id.action_managerInsertNewMenuFragment_to_managerHomepageFragment)
                 }
 
             } else if (itemName == "" || description == "" ||price == "" || img.drawable == null) {

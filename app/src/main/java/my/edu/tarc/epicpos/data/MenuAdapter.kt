@@ -39,9 +39,18 @@ class MenuAdapter (private val menuList : List<Menu>) : RecyclerView.Adapter<Men
 
     override fun onBindViewHolder(holder: MenuAdapter.menuViewHolder, position: Int) {
         val currentPosition = menuList[position]
-        holder.itemName.text = currentPosition.itemName
-        holder.price.text = "RM" + currentPosition.price
-        Glide.with(holder.img.context).load(currentPosition.imageUrl).into(holder.img)
+        if(currentPosition.categoryType == "Food"){
+            holder.itemName.text = currentPosition.itemName
+            holder.price.text = "RM" + currentPosition.price
+            Glide.with(holder.img.context).load(currentPosition.imageUrl).into(holder.img)
+        }else{
+            holder.itemView.visibility = View.GONE
+            holder.itemName.visibility = View.GONE
+            holder.price.visibility = View.GONE
+            holder.add.visibility = View.GONE
+            holder.img.visibility = View.GONE
+        }
+
         val ref = database.getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails").child("${currentPosition.itemName}")
         val db = database.getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails")
         val price = currentPosition.price

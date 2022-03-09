@@ -20,26 +20,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <SearchView
-            android:id="@+id/search"
-            android:layout_width="225dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:visibility="visible" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
 
         <Button
             android:id="@+id/btnMyOrder"
-            android:layout_width="145dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
+            android:layout_marginRight="20dp"
             android:text="My Order"
-            android:visibility="visible"
             app:cornerRadius="50dp" />
 
     </LinearLayout>
@@ -47,8 +40,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/menuRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
+        android:layout_height="wrap_content"
         tools:listitem="@layout/menu" />
 
 </LinearLayout>

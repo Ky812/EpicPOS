@@ -55,6 +55,8 @@ class LoginFragment : Fragment() {
                                                     Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_customerHomepageFragment)
                                                 }else if(snapshot.value.toString() == "Staff"){
                                                     Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_staffHomepageFragment)
+                                                }else if(snapshot.value.toString() == "Manager"){
+                                                    Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_managerHomepageFragment)
                                                 }
                                             }
                                             override fun onCancelled(error: DatabaseError) {

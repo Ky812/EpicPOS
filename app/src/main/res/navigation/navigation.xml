@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_loginFragment_to_staffHomepageFragment"
             app:destination="@id/staffHomepageFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_managerHomepageFragment"
+            app:destination="@id/managerHomepageFragment" />
     </fragment>
     <fragment
         android:id="@+id/userRegisterFragment"
@@ -85,6 +88,9 @@
             app:destination="@id/menuFragment"
             app:popUpTo="@id/customerHomepageFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_tableFragment_to_categoriseMenuFragment"
+            app:destination="@id/categoriseMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/confirmOrderFragment"
@@ -170,5 +176,64 @@
         android:id="@+id/managerInsertNewMenuFragment"
         android:name="my.edu.tarc.epicpos.ManagerInsertNewMenuFragment"
         android:label="fragment_manager_insert_new_menu"
-        tools:layout="@layout/fragment_manager_insert_new_menu" />
+        tools:layout="@layout/fragment_manager_insert_new_menu" >
+        <action
+            android:id="@+id/action_managerInsertNewMenuFragment_to_managerHomepageFragment"
+            app:destination="@id/managerHomepageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoriseMenuFragment"
+        android:name="my.edu.tarc.epicpos.CategoriseMenuFragment"
+        android:label="CategoriseMenuFragment" >
+        <action
+            android:id="@+id/action_categoriseMenuFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/managerHomepageFragment"
+        android:name="my.edu.tarc.epicpos.ManagerHomepageFragment"
+        android:label="fragment_manager_homepage"
+        tools:layout="@layout/fragment_manager_homepage" >
+        <action
+            android:id="@+id/action_managerHomepageFragment_to_addStaffFragment"
+            app:destination="@id/addStaffFragment" />
+        <action
+            android:id="@+id/action_managerHomepageFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_managerHomepageFragment_to_viewFeedbackFragment"
+            app:destination="@id/viewFeedbackFragment" />
+        <action
+            android:id="@+id/action_managerHomepageFragment_to_editMenuPageFragment"
+            app:destination="@id/editMenuPageFragment" />
+        <action
+            android:id="@+id/action_managerHomepageFragment_to_salesReportFragment"
+            app:destination="@id/salesReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesReportFragment"
+        android:name="my.edu.tarc.epicpos.SalesReportFragment"
+        android:label="fragment_sales_report"
+        tools:layout="@layout/fragment_sales_report" >
+        <action
+            android:id="@+id/action_salesReportFragment_to_managerHomepageFragment"
+            app:destination="@id/managerHomepageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editMenuPageFragment"
+        android:name="my.edu.tarc.epicpos.EditMenuPageFragment"
+        android:label="fragment_edit_menu_page"
+        tools:layout="@layout/fragment_edit_menu_page" >
+        <action
+            android:id="@+id/action_editMenuPageFragment_to_managerDeleteMenuFragment"
+            app:destination="@id/managerDeleteMenuFragment" />
+        <action
+            android:id="@+id/action_editMenuPageFragment_to_managerInsertNewMenuFragment"
+            app:destination="@id/managerInsertNewMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/managerDeleteMenuFragment"
+        android:name="my.edu.tarc.epicpos.ManagerDeleteMenuFragment"
+        android:label="fragment_manager_delete_menu"
+        tools:layout="@layout/fragment_manager_delete_menu" />
 </navigation>

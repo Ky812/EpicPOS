@@ -13,37 +13,36 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import my.edu.tarc.epicpos.databinding.FragmentStaffHomepageBinding
+import my.edu.tarc.epicpos.databinding.FragmentEditMenuPageBinding
 
 
-class StaffHomepageFragment : Fragment() {
-    private lateinit var binding : FragmentStaffHomepageBinding
+class EditMenuPageFragment : Fragment() {
+    private lateinit var binding : FragmentEditMenuPageBinding
+
     private val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_staff_homepage,container,false)
+        // Inflate the layout for this fragment
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_edit_menu_page,container,false)
+
         val database = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/")
-//        val ref = database.getReference("Customers").child("$currentUser")
         val ref = database.getReference("Users").child("$currentUser")
-
-
 
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
 //                    membership = snapshot.child("membership").value.toString()
-                    when (snapshot.child("userGender").value.toString()) {
+                    when (snapshot.child("customerGender").value.toString()) {
                         "Male" -> {
-                            binding.tvWelcome.text = "Welcome back, Sir!"
+                            binding.tvWelcome.text = "What Sir want to do?"
                         }
                         "Female" -> {
-                            binding.tvWelcome.text = "Welcome back, Madam!"
+                            binding.tvWelcome.text = "What Madam want to do?!"
                         }
                         else -> {
-                            binding.tvWelcome.text = "Welcome !"
+                            binding.tvWelcome.text = "Welcome!"
                         }
                     }
                 }
@@ -55,20 +54,14 @@ class StaffHomepageFragment : Fragment() {
 
         })
 
-        binding.orderCardView.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_staffHomepageFragment_to_tableFragment)
+        binding.addMenuCardView.setOnClickListener{
+            Navigation.findNavController(it).navigate(R.id.action_editMenuPageFragment_to_managerInsertNewMenuFragment)
         }
-        binding.profileCardView.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_staffHomepageFragment_to_editProfileFragment)
+        binding.deleteMenuCardView.setOnClickListener{
+            Navigation.findNavController(it).navigate(R.id.action_editMenuPageFragment_to_managerDeleteMenuFragment)
         }
-        binding.signOutCardView.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_staffHomepageFragment_to_loginFragment)
-            FirebaseAuth.getInstance().signOut()
-        }
-        binding.viewFeedbackCardView.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_staffHomepageFragment_to_viewFeedbackFragment)
-        }
-        return binding.root
-    }
 
+        return binding.root
+
+    }
 }
