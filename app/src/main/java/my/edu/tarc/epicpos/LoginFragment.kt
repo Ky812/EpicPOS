@@ -54,8 +54,10 @@ class LoginFragment : Fragment() {
                                                     Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
                                                     Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_customerHomepageFragment)
                                                 }else if(snapshot.value.toString() == "Staff"){
+                                                    Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
                                                     Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_staffHomepageFragment)
                                                 }else if(snapshot.value.toString() == "Manager"){
+                                                    Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
                                                     Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_managerHomepageFragment)
                                                 }
                                             }

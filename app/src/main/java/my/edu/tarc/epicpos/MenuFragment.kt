@@ -38,6 +38,7 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val btnOrderHistory = view.findViewById<Button>(R.id.btnOrderHistory)
         val btnMyOrder = view.findViewById<Button>(R.id.btnMyOrder)
         val bundle = Bundle()
         val args = this.arguments
@@ -80,6 +81,11 @@ class MenuFragment : Fragment() {
             bundle.putString("usertype",getUserType.toString())
             Navigation.findNavController(it).navigate(R.id.action_menuFragment_to_orderListFragment,bundle)
         }
+
+        btnOrderHistory.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_menuFragment_to_orderHistoryListFragment)
+        }
+
 
 //        btnTableNo.setOnClickListener(){
 //            when{

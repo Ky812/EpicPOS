@@ -83,6 +83,7 @@ class ConfirmOrderFragment : Fragment() {
         val getUserType = args?.get("usertype")
 
         val dbRef = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Orders").child("$year").child("$month_name").child("${date_name}").child("$time_name")
+        val dbOrderHistory = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child("$currentUser").child("OrderHistory").child("$time_name")
         bundle.putString("year", year.toString())
         bundle.putString("month",month_name)
         bundle.putString("date",date_name)
@@ -168,6 +169,23 @@ class ConfirmOrderFragment : Fragment() {
 
                             })
 
+                            dbOrderHistory.addListenerForSingleValueEvent(object : ValueEventListener{
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    dbOrderHistory.child("OrderDetails").child("$key").setValue(Order("$itemName","$itemPrice","$itemQty"))
+                                    dbOrderHistory.child("total").setValue("$totalAmount")
+                                    dbOrderHistory.child("orderDateTime").setValue("$dbDateTime")
+                                    dbOrderHistory.child("tableNo").setValue("$getTableNoData")
+                                    dbOrderHistory.child("orderHistoryID").setValue("$time_name")
+
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                    TODO("Not yet implemented")
+                                }
+
+                            })
+
+
                         }else{
                             if(subTotal >= 150.00){
                                 MembershipDiscount = 0.05
@@ -192,6 +210,24 @@ class ConfirmOrderFragment : Fragment() {
                                     }
 
                                 })
+
+
+                                dbOrderHistory.addListenerForSingleValueEvent(object : ValueEventListener{
+                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                        dbOrderHistory.child("OrderDetails").child("$key").setValue(Order("$itemName","$itemPrice","$itemQty"))
+                                        dbOrderHistory.child("total").setValue("$totalAmount")
+                                        dbOrderHistory.child("orderDateTime").setValue("$dbDateTime")
+                                        dbOrderHistory.child("tableNo").setValue("$getTableNoData")
+                                        dbOrderHistory.child("orderHistoryID").setValue("$time_name")
+
+                                    }
+
+                                    override fun onCancelled(error: DatabaseError) {
+                                        TODO("Not yet implemented")
+                                    }
+
+                                })
+
                             }else{
                                 MembershipDiscount = 0.0
                                 taxAmount = subTotal * SST
@@ -208,6 +244,23 @@ class ConfirmOrderFragment : Fragment() {
                                         dbRef.child("tableNo").setValue("$getTableNoData")
                                         dbRef.child("customerID").setValue("$currentUser")
                                         dbRef.child("customerName").setValue("$getName")
+                                    }
+
+                                    override fun onCancelled(error: DatabaseError) {
+                                        TODO("Not yet implemented")
+                                    }
+
+                                })
+
+
+                                dbOrderHistory.addListenerForSingleValueEvent(object : ValueEventListener{
+                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                        dbOrderHistory.child("OrderDetails").child("$key").setValue(Order("$itemName","$itemPrice","$itemQty"))
+                                        dbOrderHistory.child("total").setValue("$totalAmount")
+                                        dbOrderHistory.child("orderDateTime").setValue("$dbDateTime")
+                                        dbOrderHistory.child("tableNo").setValue("$getTableNoData")
+                                        dbOrderHistory.child("orderHistoryID").setValue("$time_name")
+
                                     }
 
                                     override fun onCancelled(error: DatabaseError) {
