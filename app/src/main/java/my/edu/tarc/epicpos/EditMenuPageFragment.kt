@@ -58,7 +58,7 @@ class EditMenuPageFragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_editMenuPageFragment_to_managerInsertNewMenuFragment)
         }
         binding.deleteMenuCardView.setOnClickListener{
-            Navigation.findNavController(it).navigate(R.id.action_editMenuPageFragment_to_managerDeleteMenuFragment)
+            Navigation.findNavController(it).navigate(R.id.action_editMenuPageFragment_to_deleteCategorizeMenu)
         }
 
         return binding.root

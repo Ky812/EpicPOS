@@ -84,7 +84,7 @@ class ManagerInsertNewMenuFragment : Fragment() {
             }else if(binding.rdDrink.isChecked){
                 category = "Drink"
             }else{
-                category = "Dezzert"
+                category = "Dessert"
             }
 
             val database =
