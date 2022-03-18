@@ -78,9 +78,6 @@
         <action
             android:id="@+id/action_menuFragment_to_orderListFragment"
             app:destination="@id/orderListFragment" />
-        <action
-            android:id="@+id/action_menuFragment_to_orderHistoryListFragment"
-            app:destination="@id/orderHistoryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/tableFragment"
@@ -89,6 +86,7 @@
         <action
             android:id="@+id/action_tableFragment_to_menuFragment"
             app:destination="@id/menuFragment"
+            app:popUpTo="@id/customerHomepageFragment"
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_tableFragment_to_categoriseMenuFragment"
@@ -232,6 +230,9 @@
         <action
             android:id="@+id/action_editMenuPageFragment_to_managerInsertNewMenuFragment"
             app:destination="@id/managerInsertNewMenuFragment" />
+        <action
+            android:id="@+id/action_editMenuPageFragment_to_deleteCategorizeMenu"
+            app:destination="@id/deleteCategorizeMenu" />
     </fragment>
     <fragment
         android:id="@+id/managerDeleteMenuFragment"
@@ -239,17 +240,11 @@
         android:label="fragment_manager_delete_menu"
         tools:layout="@layout/fragment_manager_delete_menu" />
     <fragment
-        android:id="@+id/orderHistoryListFragment"
-        android:name="my.edu.tarc.epicpos.OrderHistoryListFragment"
-        android:label="fragment_order_history_list"
-        tools:layout="@layout/fragment_order_history_list" >
+        android:id="@+id/deleteCategorizeMenu"
+        android:name="my.edu.tarc.epicpos.DeleteCategorizeMenu"
+        android:label="DeleteCategorizeMenu" >
         <action
-            android:id="@+id/action_orderHistoryListFragment_to_orderHistoryListDetailsFragment"
-            app:destination="@id/orderHistoryListDetailsFragment" />
+            android:id="@+id/action_deleteCategorizeMenu_to_managerDeleteMenuFragment"
+            app:destination="@id/managerDeleteMenuFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/orderHistoryListDetailsFragment"
-        android:name="my.edu.tarc.epicpos.OrderHistoryListDetailsFragment"
-        android:label="fragment_order_history_list_details"
-        tools:layout="@layout/fragment_order_history_list_details" />
 </navigation>
