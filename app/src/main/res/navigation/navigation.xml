@@ -78,6 +78,9 @@
         <action
             android:id="@+id/action_menuFragment_to_orderListFragment"
             app:destination="@id/orderListFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_orderHistoryListFragment"
+            app:destination="@id/orderHistoryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/tableFragment"
@@ -247,4 +250,18 @@
             android:id="@+id/action_deleteCategorizeMenu_to_managerDeleteMenuFragment"
             app:destination="@id/managerDeleteMenuFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/orderHistoryListFragment"
+        android:name="my.edu.tarc.epicpos.OrderHistoryListFragment"
+        android:label="fragment_order_history_list"
+        tools:layout="@layout/fragment_order_history_list" >
+        <action
+            android:id="@+id/action_orderHistoryListFragment_to_orderHistoryListDetailsFragment"
+            app:destination="@id/orderHistoryListDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderHistoryListDetailsFragment"
+        android:name="my.edu.tarc.epicpos.OrderHistoryListDetailsFragment"
+        android:label="fragment_order_history_list_details"
+        tools:layout="@layout/fragment_order_history_list_details" />
 </navigation>
