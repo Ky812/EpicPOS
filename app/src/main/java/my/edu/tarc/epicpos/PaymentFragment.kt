@@ -112,18 +112,33 @@ class PaymentFragment : Fragment() {
                             })
 //                            Navigation.findNavController(it).navigate(R.id.action_membershipPaymentFragment_to_membershipFragment)
                     var payAmount = ""
+                    var change = ""
                     val builder: AlertDialog.Builder =
                         AlertDialog.Builder(requireView().context)
-                    builder.setTitle("Pay By Cash : " + "${binding.tvTotalNumber.text}")
-                    builder.setMessage("Enter Pay Amount :")
-                    val input = EditText(view?.context)
-                    input.inputType = InputType.TYPE_CLASS_TEXT
-                    input.setHint("Enter amount (By Staff)")
-                    builder.setView(input)
+                    builder.setTitle("Total Payment is RM : " + "${binding.tvTotalNumber.text}")
+                    builder.setMessage("Please go to the counter let the staff assists you! Thanks!")
 
                     builder.setPositiveButton(
-                        "Pay the bill",
+                        "Pay (click by Staff)",
                         DialogInterface.OnClickListener { dialog, which ->
+
+
+//                            val builder1: AlertDialog.Builder =
+//                                AlertDialog.Builder(requireView().context)
+//                            builder1.setTitle("Your change is RM " +change)
+//
+//                            builder.setPositiveButton(
+//                                "Next",
+//                                DialogInterface.OnClickListener { dialog, which ->
+//
+//                                    dialog.cancel()
+//                                })
+//
+//                            builder.setNegativeButton(
+//                                "Cancel",
+//                                DialogInterface.OnClickListener { dialog, which ->
+//                                    dialog.dismiss()
+//                                })
 
                                 Toast.makeText(context, "Payment Successful", Toast.LENGTH_SHORT)
                                     .show()
@@ -431,3 +446,13 @@ class PaymentFragment : Fragment() {
 
 
 }
+
+
+
+
+
+
+
+
+
+
