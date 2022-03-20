@@ -27,7 +27,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="5dp"
             android:ems="10"
-            android:hint="Table No (Enter only 1-8)"
+            android:hint="Table No (Enter only 1-9)"
             android:inputType="number"
             android:maxLength="1" />
 

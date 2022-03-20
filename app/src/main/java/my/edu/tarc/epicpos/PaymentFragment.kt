@@ -94,41 +94,56 @@ class PaymentFragment : Fragment() {
                     binding.PaymentDetailsLayout.visibility = View.GONE
                     val cash = "Cash"
                     dbRef.addValueEventListener(object : ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            price = snapshot.value.toString()
+                            binding.tvTotalNumber.text = "RM $price"
+                            dbPayment.addListenerForSingleValueEvent(object : ValueEventListener{
                                 override fun onDataChange(snapshot: DataSnapshot) {
-                                    price = snapshot.value.toString()
-                                    binding.tvTotalNumber.text = "RM $price"
-                                    dbPayment.addListenerForSingleValueEvent(object : ValueEventListener{
-                                        override fun onDataChange(snapshot: DataSnapshot) {
-                                            dbPayment.push().setValue(Payment("$price","$cash","$dbDateTime","$time","$currentUser",date_name))
-                                        }
-                                        override fun onCancelled(error: DatabaseError) {
-                                            TODO("Not yet implemented")
-                                        }
-                                    })
+                                    dbPayment.push().setValue(Payment("$price","$cash","$dbDateTime","$time","$currentUser",date_name))
                                 }
                                 override fun onCancelled(error: DatabaseError) {
-                                    Log.i("Error", "Not Found")
+                                    TODO("Not yet implemented")
                                 }
                             })
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            Log.i("Error", "Not Found")
+                        }
+                    })
 //                            Navigation.findNavController(it).navigate(R.id.action_membershipPaymentFragment_to_membershipFragment)
                     var payAmount = ""
+                    var change = ""
                     val builder: AlertDialog.Builder =
                         AlertDialog.Builder(requireView().context)
-                    builder.setTitle("Pay By Cash : " + "${binding.tvTotalNumber.text}")
-                    builder.setMessage("Enter Pay Amount :")
-                    val input = EditText(view?.context)
-                    input.inputType = InputType.TYPE_CLASS_TEXT
-                    input.setHint("Enter amount (By Staff)")
-                    builder.setView(input)
+                    builder.setTitle("Total Payment is RM : " + "${binding.tvTotalNumber.text}")
+                    builder.setMessage("Please go to the counter let the staff assists you! Thanks!")
 
                     builder.setPositiveButton(
-                        "Pay the bill",
+                        "Pay (click by Staff)",
                         DialogInterface.OnClickListener { dialog, which ->
 
-                                Toast.makeText(context, "Payment Successful", Toast.LENGTH_SHORT)
-                                    .show()
 
-                                dialog.cancel()
+//                            val builder1: AlertDialog.Builder =
+//                                AlertDialog.Builder(requireView().context)
+//                            builder1.setTitle("Your change is RM " +change)
+//
+//                            builder.setPositiveButton(
+//                                "Next",
+//                                DialogInterface.OnClickListener { dialog, which ->
+//
+//                                    dialog.cancel()
+//                                })
+//
+//                            builder.setNegativeButton(
+//                                "Cancel",
+//                                DialogInterface.OnClickListener { dialog, which ->
+//                                    dialog.dismiss()
+//                                })
+
+                            Toast.makeText(context, "Payment Successful", Toast.LENGTH_SHORT)
+                                .show()
+
+                            dialog.cancel()
 
                         })
 
@@ -142,11 +157,11 @@ class PaymentFragment : Fragment() {
                     alertDialog.show()
 
 
-                        if(getUserType == "Customer"){
-                            Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_customerFeedbackFragment)
-                        }else if(getUserType == "Staff"){
-                            Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_staffHomepageFragment)
-                        }
+                    if(getUserType == "Customer"){
+                        Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_customerFeedbackFragment)
+                    }else if(getUserType == "Staff"){
+                        Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_staffHomepageFragment)
+                    }
 
                 }
                 binding.rdBtnVisa.isChecked -> {
@@ -169,14 +184,14 @@ class PaymentFragment : Fragment() {
                                 override fun onDataChange(snapshot: DataSnapshot) {
                                     price = snapshot.value.toString()
                                     binding.tvTotalNumber.text = "RM $price"
-                            dbPayment.addListenerForSingleValueEvent(object : ValueEventListener{
-                                override fun onDataChange(snapshot: DataSnapshot) {
-                                    dbPayment.push().setValue(Payment("$price","$visa","$dbDateTime","$time","$currentUser",date_name))
-                                }
-                                override fun onCancelled(error: DatabaseError) {
-                                    TODO("Not yet implemented")
-                                }
-                            })
+                                    dbPayment.addListenerForSingleValueEvent(object : ValueEventListener{
+                                        override fun onDataChange(snapshot: DataSnapshot) {
+                                            dbPayment.push().setValue(Payment("$price","$visa","$dbDateTime","$time","$currentUser",date_name))
+                                        }
+                                        override fun onCancelled(error: DatabaseError) {
+                                            TODO("Not yet implemented")
+                                        }
+                                    })
                                 }
                                 override fun onCancelled(error: DatabaseError) {
                                     Log.i("Error", "Not Found")

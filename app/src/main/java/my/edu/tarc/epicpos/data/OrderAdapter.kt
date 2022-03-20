@@ -40,21 +40,6 @@ class OrderAdapter (private val orderList : List<Order>) : RecyclerView.Adapter<
         holder.orderDetailsName.text = currentPosition.itemName
         holder.orderDetailsQty.text = currentPosition.quantity
         holder.orderDetailsPrice.text = "RM" + currentPosition.price
-//
-//        ref.addListenerForSingleValueEvent(object : ValueEventListener{
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                snapshot.children.forEach {
-//                    val itemPrice : String = it.child("price").value.toString()
-//                    totalAmount += itemPrice.toDouble()
-//                    Log.i("testing","$totalAmount")
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
 
         holder.remove.setOnClickListener(){
             val getKey = database.getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails")
@@ -71,12 +56,7 @@ class OrderAdapter (private val orderList : List<Order>) : RecyclerView.Adapter<
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 var rmv = snapshot.ref.removeValue()
                             }
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    //for (snap in snapshot.children){
-//                        var rmv = snapshot.ref.key
-//                        Log.i("rmv","$rmv")
-//                    //}
-//                }
+
 
                             override fun onCancelled(error: DatabaseError) {
                                 Log.w("TAG", "Error Delete document")

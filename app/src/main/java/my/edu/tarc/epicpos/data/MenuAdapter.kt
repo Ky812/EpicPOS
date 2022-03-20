@@ -100,22 +100,7 @@ class MenuAdapter (private val menuList : List<Menu>) : RecyclerView.Adapter<Men
                                 Log.w("TAG", "Error adding document")
                             }
                         })
-                            //got bug
-//                            db.addListenerForSingleValueEvent(object : ValueEventListener{
-//                                override fun onDataChange(snapshot: DataSnapshot) {
-//                                    snapshot.children.forEach {
-//                                        //val key : String = it.key.toString()
-//                                        val itemPrice : String = it.child("price").value.toString()
-//                                        total += itemPrice.toDouble()
-//                                        Log.i("price","$total")
-//                                    }
-//                                }
-//
-//                                override fun onCancelled(error: DatabaseError) {
-//                                    TODO("Not yet implemented")
-//                                }
-//
-//                            })
+
                         }
                         dialog.cancel()
                     })
@@ -132,18 +117,7 @@ class MenuAdapter (private val menuList : List<Menu>) : RecyclerView.Adapter<Men
 
 
         })
-//        holder.add.setOnClickListener(){
-//            ref.addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    ref.push().setValue("${holder.price.text}")
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    Log.w("TAG", "Error adding document")
-//                }
-//
-//            })
-//        }
+
     }
 
     override fun getItemCount(): Int {

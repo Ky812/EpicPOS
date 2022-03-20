@@ -87,7 +87,6 @@ class BeverageAdapter (private val beverageList : List<Menu>) : RecyclerView.Ada
                                         ref.setValue(Order("${holder.itemName.text}","$existCalPrice","${totalExistQty.toString()}"))
                                         Toast.makeText(view.context,"${holder.itemName.text} add to order successful.", Toast.LENGTH_SHORT).show()
                                     }else{
-//                                ref.push().setValue(Order("${holder.itemName.text}","$calPrice","$itemQty"))
                                         ref.setValue(Order("${holder.itemName.text}","$calPrice","$itemQty"))
                                         Toast.makeText(view.context,"${holder.itemName.text} add to order successful.", Toast.LENGTH_SHORT).show()
                                     }

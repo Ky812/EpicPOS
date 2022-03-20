@@ -41,18 +41,7 @@ class MembershipFragment : Fragment() {
                         "Non-Membership" ->{
                             binding.textView4.text = "Memebership Status : Non Membership"
                             binding.btnSubscribe.setOnClickListener {
-//                                db.addValueEventListener(object : ValueEventListener{
-//                                    override fun onDataChange(snapshot: DataSnapshot) {
-//                                        db.child("membership").setValue("$membershipExpire")
-//                                    }
-//
-//                                    override fun onCancelled(error: DatabaseError) {
-//                                        Log.w("TAG", "Update Failed")
-//                                    }
-//
-//                                })
-//                                binding.btnSubscribe.text = "Subscribed"
-//                                binding.btnSubscribe.isClickable = false
+
                                 Navigation.findNavController(it).navigate(R.id.action_membershipFragment_to_membershipPaymentFragment)
                             }
                         }else -> {

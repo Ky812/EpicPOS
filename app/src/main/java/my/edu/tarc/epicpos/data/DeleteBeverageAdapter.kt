@@ -74,14 +74,6 @@ class DeleteBeverageAdapter (private val beverageList : List<Menu>) : RecyclerVi
                                         var rmv = snapshot.ref.removeValue()
                                     }
 
-
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    //for (snap in snapshot.children){
-//                        var rmv = snapshot.ref.key
-//                        Log.i("rmv","$rmv")
-//                    //}
-//                }
-
                                     override fun onCancelled(error: DatabaseError) {
                                         Log.w("TAG", "Error Delete document")
                                     }

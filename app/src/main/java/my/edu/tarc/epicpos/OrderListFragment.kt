@@ -74,23 +74,6 @@ class OrderListFragment : Fragment() {
 
         db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child("$currentUser").child("TempOrder").child("OrderDetails")
 
-//        db.addListenerForSingleValueEvent(object : ValueEventListener{
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                snapshot.children.forEach {
-//                    val totalPrice : String = it.child("price").value.toString()
-//                    testingAmount += totalPrice.toDouble()
-//                    trial = testingAmount.toDouble() * SST
-//                    tvTotalPrice.text = "Total Amount : RM $testingAmount"
-//                    trialTotal = trial + testingAmount
-//                    Log.i("trial","$trialTotal")
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
 
         btnCalAmount.setOnClickListener(){
             bundle.putString("tableNumber",getTableNoData.toString())
@@ -99,57 +82,6 @@ class OrderListFragment : Fragment() {
             bundle.putString("usertype",getUserType.toString())
             Navigation.findNavController(it).navigate(R.id.action_orderListFragment_to_confirmOrderFragment,bundle)
 
-//            db.addListenerForSingleValueEvent(object : ValueEventListener{
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    snapshot.children.forEach {
-//                        val key : String = it.key.toString()
-//                        val itemName : String = it.child("itemName").value.toString()
-//                        val itemPrice : String = it.child("price").value.toString()
-//                        val itemQty : String = it.child("quantity").value.toString()
-//                        totalAmount += itemPrice.toDouble()
-//                        Log.i("total","$totalAmount")
-//
-//                        val dbRef = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Orders").child("$year").child("$month_name").child("${date_name}").child("$time_name")
-//                        dbRef.addListenerForSingleValueEvent(object : ValueEventListener{
-//                            override fun onDataChange(snapshot: DataSnapshot) {
-////                            testdb.child("$key").child("itemName").setValue("$data")
-//                                dbRef.child("OrderDetails").child("$key").setValue(Order("$itemName","$itemPrice","$itemQty"))
-//                                dbRef.child("total").setValue("$totalAmount")
-//
-//                            }
-//
-//                            override fun onCancelled(error: DatabaseError) {
-//                                TODO("Not yet implemented")
-//                            }
-//
-//                        })
-//
-//                    }
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    TODO("Not yet implemented")
-//                }
-//
-//            })
-
-//            val dbAmountRef = Firebase.database("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Orders").child("$year").child("$month_name").child("${date_name}").child("$time_name").child("total")
-//            dbAmountRef.addListenerForSingleValueEvent(object : ValueEventListener{
-//                override fun onDataChange(snapshot: DataSnapshot) {
-////                    if(snapshot.exists()){
-//                        strTotal = snapshot.value.toString()
-////                        taxAmount = strTotal.toDouble() * SST
-////                        total = strTotal.toDouble() + taxAmount
-//                        Log.i("data","$strTotal")
-//
-////                    }
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    TODO("Not yet implemented")
-//                }
-//
-//            })
         }
         getOrder()
     }
@@ -176,10 +108,7 @@ class OrderListFragment : Fragment() {
             }
 
         })
-        //get key value
-        //db = FirebaseDatabase.getInstance("https://fypproject-bdcb3-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Customers").child("$currentUser").child("TempOrder")
 
-//        db.orderByChild("itemName").equalTo("Salmon Sushi").addListenerForSingleValueEvent(object : ValueEventListener{
 
     }
 }

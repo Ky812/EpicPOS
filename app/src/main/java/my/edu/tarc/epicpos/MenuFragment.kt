@@ -68,11 +68,6 @@ class MenuFragment : Fragment() {
             getDessert()
         }
 
-//        val btnTableNo = view.findViewById<Button>(R.id.btnTableNoConfirm)
-//        val editTableNo = view.findViewById<EditText>(R.id.editTableNo)
-//        val tvTableNo = view.findViewById<TextView>(R.id.tvTableNo)
-//        val tvOrder = view.findViewById<TextView>(R.id.tvOrder)
-//        val searchView = view.findViewById<SearchView>(R.id.search)
 
         btnMyOrder.setOnClickListener(){
             bundle.putString("tableNumber",getTableNoData.toString())
