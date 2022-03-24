@@ -112,6 +112,9 @@
         <action
             android:id="@+id/action_membershipFragment_to_membershipPaymentFragment"
             app:destination="@id/membershipPaymentFragment" />
+        <action
+            android:id="@+id/action_membershipFragment_to_customerHomepageFragment"
+            app:destination="@id/customerHomepageFragment" />
     </fragment>
     <fragment
         android:id="@+id/membershipPaymentFragment"

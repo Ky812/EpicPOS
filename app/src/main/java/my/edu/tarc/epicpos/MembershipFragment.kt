@@ -60,7 +60,10 @@ class MembershipFragment : Fragment() {
 
         })
 
+        binding.button8.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_membershipFragment_to_customerHomepageFragment)
 
+        }
 
 
         return binding.root
