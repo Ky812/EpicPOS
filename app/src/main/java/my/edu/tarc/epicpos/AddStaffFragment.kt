@@ -84,7 +84,7 @@ class AddStaffFragment : Fragment() {
 
                             })
                             Toast.makeText(context,"Registered Successful",Toast.LENGTH_SHORT).show()
-                            //Navigation.findNavController(it).navigate(R.id.action_userRegisterFragment_to_loginFragment)
+                            Navigation.findNavController(it).navigate(R.id.action_addStaffFragment_to_managerHomepageFragment)
 
                         }else{
                             Toast.makeText(context,task.exception!!.message.toString(),Toast.LENGTH_SHORT).show()

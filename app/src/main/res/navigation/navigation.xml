@@ -177,7 +177,11 @@
     <fragment
         android:id="@+id/addStaffFragment"
         android:name="my.edu.tarc.epicpos.AddStaffFragment"
-        android:label="AddStaffFragment" />
+        android:label="AddStaffFragment" >
+        <action
+            android:id="@+id/action_addStaffFragment_to_managerHomepageFragment"
+            app:destination="@id/managerHomepageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/managerInsertNewMenuFragment"
         android:name="my.edu.tarc.epicpos.ManagerInsertNewMenuFragment"
