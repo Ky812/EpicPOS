@@ -80,27 +80,6 @@ class MembershipPaymentFragment : Fragment() {
                         }
                     }
                 }
-                binding.rdBtnAmex.isChecked -> {
-                    binding.editCreditcardAmexNumber.visibility = View.VISIBLE
-                    binding.editCreditcardNumber.visibility = View.GONE
-                    binding.button3.setOnClickListener {
-                        when{
-                            TextUtils.isEmpty(binding.editCreditcardAmexNumber.text.toString()) -> {
-                                Toast.makeText(context,"Please enter credit card number.",Toast.LENGTH_SHORT).show()
-                            }
-                            TextUtils.isEmpty(binding.editExpiryDate.text.toString()) -> {
-                                Toast.makeText(context,"Please enter credit card expiry date.",Toast.LENGTH_SHORT).show()
-                            }
-                            TextUtils.isEmpty(binding.editCVC.text.toString()) -> {
-                                Toast.makeText(context,"Please enter credit card CVC.",Toast.LENGTH_SHORT).show()
-                            }else -> {
-                            updateMembershipStatus()
-                            Navigation.findNavController(it).navigate(R.id.action_membershipPaymentFragment_to_membershipFragment)
-                            Toast.makeText(context,"Subscribed Successful",Toast.LENGTH_SHORT).show()
-                        }
-                        }
-                    }
-                }
             }
 
         }

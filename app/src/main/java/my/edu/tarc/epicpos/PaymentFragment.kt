@@ -252,49 +252,6 @@ class PaymentFragment : Fragment() {
                         }
                     }
                 }
-                binding.rdBtnAmex.isChecked -> {
-                    binding.editCreditcardAmexNumber.visibility = View.VISIBLE
-                    binding.editCreditcardNumber.visibility = View.GONE
-                    val amex = "American Express"
-                    binding.button3.setOnClickListener {
-                        when{
-                            TextUtils.isEmpty(binding.editCreditcardAmexNumber.text.toString()) -> {
-                                Toast.makeText(context,"Please enter credit card number.", Toast.LENGTH_SHORT).show()
-                            }
-                            TextUtils.isEmpty(binding.editExpiryDate.text.toString()) -> {
-                                Toast.makeText(context,"Please enter credit card expiry date.",
-                                    Toast.LENGTH_SHORT).show()
-                            }
-                            TextUtils.isEmpty(binding.editCVC.text.toString()) -> {
-                                Toast.makeText(context,"Please enter credit card CVC.", Toast.LENGTH_SHORT).show()
-                            }else -> {
-                            dbRef.addValueEventListener(object : ValueEventListener{
-                                override fun onDataChange(snapshot: DataSnapshot) {
-                                    price = snapshot.value.toString()
-                                    binding.tvTotalNumber.text = "RM $price"
-                                    dbPayment.addListenerForSingleValueEvent(object : ValueEventListener{
-                                        override fun onDataChange(snapshot: DataSnapshot) {
-                                            dbPayment.push().setValue(Payment("$price","$amex","$dbDateTime","$time","$currentUser",date_name))
-                                        }
-                                        override fun onCancelled(error: DatabaseError) {
-                                            TODO("Not yet implemented")
-                                        }
-                                    })
-                                }
-                                override fun onCancelled(error: DatabaseError) {
-                                    Log.i("Error", "Not Found")
-                                }
-                            })
-                            Toast.makeText(context,"Payment Successful", Toast.LENGTH_SHORT).show()
-                        }
-                        }
-                        if(getUserType == "Customer"){
-                            Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_customerFeedbackFragment)
-                        }else if(getUserType == "Staff"){
-                            Navigation.findNavController(it).navigate(R.id.action_paymentFragment_to_staffHomepageFragment)
-                        }
-                    }
-                }
             }
 
         }

@@ -254,11 +254,6 @@
                     android:layout_height="wrap_content"
                     android:text="Pay By Mastercard" />
 
-                <RadioButton
-                    android:id="@+id/rdBtnAmex"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Amex" />
             </RadioGroup>
 
             <Button
@@ -324,7 +319,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Expiry Date (MM/YY)"
-                    android:inputType="number" />
+                    android:inputType="text"
+                    android:maxLength="5" />
 
                 <EditText
                     android:id="@+id/editCVC"
